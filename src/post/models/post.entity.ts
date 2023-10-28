@@ -3,31 +3,33 @@ import { PostHashtag } from 'src/hashtag/models/post-hashtag.entity';
 import { User } from 'src/user/models/user.entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
+export type SnsType = 'facebook' | 'twitter' | 'instagram' | 'threads';
+
 @Entity({ name: 'post' })
 export class Post extends BaseEntity {
-  @Column({ comment: '외부 SNS에서 관리하는 고유 인식 값' })
+  @Column({ name: 'content_id', comment: '외부 SNS에서 관리하는 고유 인식 값' })
   contentId: string;
 
   @Column({ comment: '외부 SNS의 유형' })
-  type: 'facebook' | 'twitter' | 'instagram' | 'threads';
+  type: SnsType;
 
-  @Column({ comment: '게시글 제목' })
+  @Column({ comment: '외부 SNS의 게시글 제목' })
   title: string;
 
-  @Column()
+  @Column({ comment: '외부 SNS의 게시글 내용' })
   content: string;
 
-  @Column()
-  hashtags: string;
-
-  @Column()
+  @Column({ name: 'view_count', comment: 'Feed에서 조회 수 기록' })
   viewCount: number;
 
-  @Column()
+  @Column({ name: 'like_count', comment: 'Feed에서 좋아요 수 기록' })
   likeCount: number;
 
-  @Column()
+  @Column({ name: 'share_count', comment: 'Feed에서 공유 수 기록' })
   shareCount: number;
+
+  @Column({ comment: 'Join 사용없이 가져오기 위한 hashtag (hashtag Table과 같이 저장됨)' })
+  hashtags: string;
 
   @Column({ name: 'user_id', type: 'bigint', unsigned: true, comment: '게시물 등록을 한 유저의 고유 값' })
   userId: string;

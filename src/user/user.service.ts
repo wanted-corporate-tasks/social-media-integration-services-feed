@@ -9,7 +9,7 @@ export class UserService {
   async findOne(account: string, isNeedPassword = false) {
     const user = await this.userRepository.findOne({ where: { account } });
 
-    if (!isNeedPassword) {
+    if (user && !isNeedPassword) {
       delete user.password;
       delete user.latestPassword;
     }
@@ -19,9 +19,6 @@ export class UserService {
 
   async registerUser(user: Partial<User>) {
     // 이메일 인증코드 발송 개발중 - 개발 완료까지 인증 여부 활성화
-    user.isActive = true;
-    user.latestPassword = user.password;
-
-    await this.userRepository.insert(user);
+    await this.userRepository.save(this.userRepository.create(user));
   }
 }

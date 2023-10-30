@@ -1,6 +1,6 @@
 import { SoftDeleteEntity } from 'src/database/base.entity';
-import { Post } from 'src/post/models/post.entity';
-import { Column, Entity, OneToMany } from 'typeorm';
+import { BeforeInsert, Column, Entity } from 'typeorm';
+import { hashSync } from 'bcrypt';
 
 @Entity({ name: 'user' })
 export class User extends SoftDeleteEntity {
@@ -17,11 +17,13 @@ export class User extends SoftDeleteEntity {
   code: string;
 
   @Column({ name: 'is_active', comment: '이메일 인증 코드 인증 여부에 따른 계정 활동 가능 여부' })
-  isActive: string;
+  isActive: boolean;
 
   @Column({ name: 'latest_password', comment: '비밀번호 재설정 시 최근에 사용한 비밀번호는 사용 할 수 없음' })
   latestPassword: string;
 
-  @OneToMany(() => Post, post => post.user)
-  post: Post[];
+  @BeforeInsert()
+  private beforeInsert() {
+    this.password = hashSync(this.password, 10);
+  }
 }

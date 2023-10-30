@@ -1,0 +1,30 @@
+// 해당 내용은 문서파일에서 유출되지 않게 관리해야하나 사이드 프로젝트에 사용되는 부분임으로 일시적인 공개
+// 실제 서비스에 사용시에는 해당 파일은 gitignore에 등록되어 유출되지 않도록 해야함
+{
+  "name": "password1",
+  "name": "password",
+  "name": "passw123",
+  "name": "passw0rd",
+  "name": "fuckyou1",
+  "name": "fucking",
+  "name": "fuckyou",
+  "name": "fuckoff",
+  "name": "samsung",
+  "name": "abc123",
+  "name": "guest",
+  "name": "qwerty",
+  "name": "abc123",
+  "name": "1q2w3e",
+  "name": "a1b2c3",
+  "name": "1234567890",
+  "name": "col123456",
+  "name": "123456789",
+  "name": "12345678",
+  "name": "1234567",
+  "name": "123123",
+  "name": "123321",
+  "name": "123456",
+  "name": "12345",
+  "name": "1234",
+  "name": "123"
+}

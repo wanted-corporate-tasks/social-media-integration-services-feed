@@ -1,7 +1,6 @@
 import { BaseEntity } from 'src/database/base.entity';
 import { PostHashtag } from 'src/hashtag/models/post-hashtag.entity';
-import { User } from 'src/user/models/user.entity';
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 export type SnsType = 'facebook' | 'twitter' | 'instagram' | 'threads';
 
@@ -30,13 +29,6 @@ export class Post extends BaseEntity {
 
   @Column({ comment: 'Join 사용없이 가져오기 위한 hashtag (hashtag Table과 같이 저장됨)' })
   hashtags: string;
-
-  @Column({ name: 'user_id', type: 'bigint', unsigned: true, comment: '게시물 등록을 한 유저의 고유 값' })
-  userId: string;
-
-  @ManyToOne(() => User, user => user.post)
-  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
-  user: User;
 
   @OneToMany(() => PostHashtag, postHashtag => postHashtag.post, { cascade: true })
   postHashtag: PostHashtag[];

@@ -5,6 +5,8 @@ import { SignUpDto } from './dto/sign-up.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BadPassword } from './entities/bad-password.entity';
 import { Repository } from 'typeorm';
+import { compare } from 'bcrypt';
+import { SignInDto } from './dto/sign-in.dto';
 
 @Injectable()
 export class AuthService {
@@ -33,5 +35,24 @@ export class AuthService {
     const isIncludeBadWord = badWords.some(badWord => password.includes(badWord));
 
     if (isIncludeBadWord) throw new BadRequestException('사용할 수 없는 비밀번호입니다.');
+  }
+
+  async signIn(signUpDto: SignInDto) {
+    const { account, password } = signUpDto;
+
+    const user = await this.usersService.findOne(account, true);
+
+    if (!user) throw new BadRequestException('로그인 정보가 일치하지 않습니다.');
+
+    const isValidPassword = await compare(password, user.password);
+
+    if (!isValidPassword) throw new BadRequestException('로그인 정보가 일치하지 않습니다.');
+
+    const accessToken = await this.jwtService.signAsync({
+      id: user.id,
+      email: user.email,
+    });
+
+    return { accessToken };
   }
 }

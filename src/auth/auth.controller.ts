@@ -1,6 +1,7 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignUpDto } from './dto/sign-up.dto';
+import { SignInDto } from './dto/sign-in.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -16,15 +17,18 @@ export class AuthController {
   }
 
   // 로그인
-  @Post()
-  async signIn() {}
+  @Post('signIn')
+  async signIn(@Body() signUpDto: SignInDto) {
+    const data = await this.authService.signIn(signUpDto);
 
-  // 이메일 인증
+    return { status: true, message: '로그인에 성공했습니다.', data };
+  }
+
+  // 이메일 인증 - 개발중
   @Post()
   async approveRegistration() {}
 
-  // 비밀번호 변경 - jwt
-  // 기존 pw, 변경할 pw, 더블체크 pw
+  // 비밀번호 변경 - 개발중
   @Post()
   async changePassword() {}
 }

@@ -12,10 +12,6 @@ export class PostController {
     // await this.postService.
   }
 
-  @Get('test')
-  async test() {
-    return await this.postService.test();
-  }
   // 게시물 상세
   // 게시물 좋아요
   // 게시물 공유

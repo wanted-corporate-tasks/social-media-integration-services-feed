@@ -1,6 +1,6 @@
 // postList.dto.ts
 
-import { IsString, IsOptional, IsEnum, IsInt } from 'class-validator';
+import { IsString, IsOptional, IsEnum, IsInt, IsNotEmpty } from 'class-validator';
 
 export enum OrderBy {
   CREATED_AT = 'created_at',
@@ -16,19 +16,25 @@ export enum SearchBy {
   TITLE_CONTENT = 'title,content',
 }
 
+export enum SortBy {
+  DESC = 'DESC',
+  ASC = 'ASC',
+}
+
 export class PostListDto {
+  @IsNotEmpty()
   @IsString()
-  hashtagId: number;
+  hashtag: string | number;
 
-  @IsOptional()
   @IsString()
-  type: string;
+  type: string | null = null;
 
-  @IsOptional()
   @IsEnum(OrderBy)
   orderBy: OrderBy = OrderBy.CREATED_AT;
 
-  @IsOptional()
+  @IsEnum(SortBy)
+  sort: SortBy = SortBy.DESC;
+
   @IsEnum(SearchBy)
   searchBy: SearchBy = SearchBy.TITLE_CONTENT;
 

@@ -2,7 +2,7 @@ import { Post } from 'src/post/models/post.entity';
 import { Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 import { Hashtag } from './hashtag.entity';
 
-@Entity({ name: 'post-hashtag' })
+@Entity({ name: 'post_hashtag' })
 export class PostHashtag {
   @PrimaryColumn({ name: 'hashtag_id', type: 'bigint', unsigned: true })
   hashtagId: number;

@@ -1,5 +1,5 @@
-import { Hashtag } from 'src/hashtag/models/hashtag.entity';
-import { PostHashtag } from 'src/hashtag/models/post-hashtag.entity';
+import { Hashtag } from 'src/post/dto/hashtag.entity';
+import { PostHashtag } from 'src/post/dto/post-hashtag.entity';
 import { Post, SnsType } from 'src/post/models/post.entity';
 import { MigrationInterface, QueryRunner } from 'typeorm';
 

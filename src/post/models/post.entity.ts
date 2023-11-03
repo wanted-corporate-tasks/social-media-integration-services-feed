@@ -1,5 +1,5 @@
 import { BaseEntity } from 'src/database/base.entity';
-import { PostHashtag } from 'src/hashtag/models/post-hashtag.entity';
+import { PostHashtag } from 'src/post/dto/post-hashtag.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 
 export type SnsType = 'facebook' | 'twitter' | 'instagram' | 'threads';

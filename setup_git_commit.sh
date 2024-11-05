@@ -4,11 +4,6 @@
 HOOKS_DIR=".git/hooks"
 HOOK_FILE="$HOOKS_DIR/prepare-commit-msg"
 
-# 기존 prepare-commit-msg가 있다면 백업
-if [ -f "$HOOK_FILE" ]; then
-    mv "$HOOK_FILE" "${HOOK_FILE}.bak"
-fi
-
 # prepare-commit-msg 내용 작성
 cat << 'EOF' > "$HOOK_FILE"
 #!/bin/bash
